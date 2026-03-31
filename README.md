@@ -99,4 +99,17 @@ print(result)
 # ERROR! The converted number cannot be a negative number
 ```
 ---
-###### Made by the Hi Team.
+
+## Changelog
+
+| Version   | Date       | Commit                                           |
+|-----------|------------|--------------------------------------------------|
+| **0.1.0** | 10.03.2026 | Beta: First Beta Version On PyPI                 |
+| **0.1.1** | 10.03.2026 | Beta: Fixed Critical Bugs                        |
+| **0.1.2** | 10.03.2026 | Beta: Fixed Critical Bugs And New Error Handling |
+| **1.0.0** | 31.03.2026 | Release: New Readme                              |
+| **1.0.1** | 31.03.2026 | Release: New Readme                              |
+| **1.0.2** | 31.03.2026 | Release: Without Changes                         |
+
+---
+###### **Made by the Hi Team.**
