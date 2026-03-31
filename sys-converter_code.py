@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -
-# version 0.1.3
+# version 1.0.0
 
 class SYS_Convertor_Class():
     def __init__(self):
