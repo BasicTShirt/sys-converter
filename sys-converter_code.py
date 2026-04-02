@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -
-# version 1.0.2
+# version 1.1.0
 
 class SYS_Convertor_Class():
     def __init__(self):
@@ -26,16 +26,30 @@ class SYS_Convertor_Class():
                 self.errors.append("ERROR! The base of the number system cannot be less than 2")
             if int(sys_state) != sys_state:
                 self.errors.append("ERROR! The base of the number system cannot be float number")
-                self.error_counter_1 += 1
-
-        if number < 0:
-            self.errors.append("ERROR! The converted number cannot be a negative number")
 
         if self.errors:
             self.error_state = False
             self.error_message = "\n".join(self.errors) + "\n"
         else:
             self.error_state = True
+
+    def verification_error_handler(self, number, sys_state):
+        self.verification_error_state = None
+        self.verification_error_message = None
+        self.verification_errors = []
+
+        try:
+            num = int(number)
+            if str(num) != number.lstrip():
+                raise ValueError
+        except ValueError:
+            self.verification_errors.append("ERROR! The converted number is not a valid integer")
+
+        if self.verification_errors:
+            self.verification_error_state = False
+            self.verification_error_message = "\n".join(self.verification_errors) + "\n"
+        else:
+            self.verification_error_state = True
 
     def sys(self, number, sys_state):
         self.error_handler(number, sys_state)
@@ -44,6 +58,15 @@ class SYS_Convertor_Class():
             if int(number) == number:
                 if number == 0:
                     return "0"
+                elif number < 0:
+                    self.temp_number = int(str(number)[1:])
+                    self.number_in_sys = []
+
+                    while self.temp_number != 0:
+                        self.number_in_sys.append(self.sys_alphabet[self.temp_number % sys_state])
+                        self.temp_number //= sys_state
+
+                    return "-" + "".join(reversed(self.number_in_sys))
                 else:
                     self.temp_number = int(number)
                     self.number_in_sys = []
@@ -94,11 +117,26 @@ class SYS_Convertor_Class():
 
         else:
             return self.error_message
+    def resys(self, number, sys_state):
+        self.verification_error_handler(number, sys_state)
+
+        if not(self.verification_error_state):
+            return self.verification_error_message
+        else:
+            self.error_handler(int(number), sys_state)
+
+            if self.error_state:
+                return int(number, sys_state)
+            else:
+                return self.error_message
 
 M = SYS_Convertor_Class()
 
 def sys(n, s):
     return M.sys(n, s)
+def resys(n, s):
+    return M.resys(n, s)
 
 if __name__ == '__main__':
     sys(n, s)
+    resys(n, s)
