@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -
-# version 1.1.1
+# version 1.1.2
 
 class SYS_Convertor_Class():
     def __init__(self):
@@ -38,11 +38,7 @@ class SYS_Convertor_Class():
         self.verification_error_message = None
         self.verification_errors = []
 
-        try:
-            num = int(number)
-            if str(num) != number.lstrip():
-                raise ValueError
-        except ValueError:
+        if ("-" in number and number != "-" + number.replace("-", "")) or " " in number:
             self.verification_errors.append("ERROR! The converted number is not a valid integer")
 
         if self.verification_errors:
@@ -123,7 +119,7 @@ class SYS_Convertor_Class():
         if not(self.verification_error_state):
             return self.verification_error_message
         else:
-            self.error_handler(int(number), sys_state)
+            self.error_handler(int(number, sys_state), sys_state)
 
             if self.error_state:
                 return int(number, sys_state)
