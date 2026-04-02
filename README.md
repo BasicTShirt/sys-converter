@@ -1,4 +1,4 @@
-# Last Update: 1.1.0
+# Last Big Update: 1.1.0
 
 ### - Added Support For Negative Numbers.
 ### - A New Function «resys» For Converting To Decimal.
@@ -108,15 +108,16 @@ print(result)
 
 ## Changelog
 
-| Version    | Date       | Commit                                                                                                     |
-|------------|------------|------------------------------------------------------------------------------------------------------------|
-| **0.1.0**  | 10.03.2026 | Beta: First Beta Version On PyPI                                                                           |
-| **0.1.1**  | 10.03.2026 | Beta: Fixed Critical Bugs                                                                                  |
-| **0.1.2**  | 10.03.2026 | Beta: Fixed Critical Bugs And New Error Handling                                                           |
-| **1.0.0**  | 31.03.2026 | Release: New Readme                                                                                        |
-| **1.0.1**  | 31.03.2026 | Release: New Readme                                                                                        |
-| **1.0.2**  | 31.03.2026 | Release: Without Changes                                                                                   |
-| **1.1.0**  | 02.04.2026 | Release: Added Support For Negative Numbers, A New "resys" Function, A New Error Handler And A New Readme  |
+| Version    | Date       | Commit                                                                                                    |
+|------------|------------|-----------------------------------------------------------------------------------------------------------|
+| **0.1.0**  | 10.03.2026 | Beta: First Beta Version On PyPI                                                                          |
+| **0.1.1**  | 10.03.2026 | Beta: Fixed Critical Bugs                                                                                 |
+| **0.1.2**  | 10.03.2026 | Beta: Fixed Critical Bugs And New Error Handling                                                          |
+| **1.0.0**  | 31.03.2026 | Release: New Readme                                                                                       |
+| **1.0.1**  | 31.03.2026 | Release: New Readme                                                                                       |
+| **1.0.2**  | 31.03.2026 | Release: Without Changes                                                                                  |
+| **1.1.0**  | 02.04.2026 | Release: Added Support For Negative Numbers, A New "resys" Function, A New Error Handler And A New Readme |
+| **1.1.1**  | 02.04.2026 | Release: Fixed Critical Bugs                                                                              |
 
 ---
 ###### **Made by the Hi Team.**
