@@ -120,6 +120,7 @@ print(result)
 | **1.1.1** | 02.04.2026 | Release: Fixed Critical Bugs                                                                              |
 | **1.1.2** | 02.04.2026 | Release: Fixed Critical Bugs                                                                              |
 | **1.1.3** | 03.04.2026 | Release: Fixed Error Handler Bugs                                                                         |
+| **1.1.4** | 03.04.2026 | Release: Added Support Float Numbers For «resys» Function And A New Error Handler                         |
 
 ---
 ###### **Made by the Hi Team.**
