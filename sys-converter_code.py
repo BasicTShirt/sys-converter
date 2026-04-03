@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -
-# version 1.1.2
+# version 1.1.3
 
 class SYS_Convertor_Class():
     def __init__(self):
@@ -119,7 +119,7 @@ class SYS_Convertor_Class():
         if not(self.verification_error_state):
             return self.verification_error_message
         else:
-            self.error_handler(int(number, sys_state), sys_state)
+            self.error_handler(number, sys_state)
 
             if self.error_state:
                 return int(number, sys_state)
