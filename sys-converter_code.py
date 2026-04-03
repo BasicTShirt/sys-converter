@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -
-# version 1.1.3
+# version 1.1.4
 
 class SYS_Convertor_Class():
     def __init__(self):
@@ -36,10 +36,21 @@ class SYS_Convertor_Class():
     def verification_error_handler(self, number, sys_state):
         self.verification_error_state = None
         self.verification_error_message = None
+        self.verification_number = number.split(".")
         self.verification_errors = []
 
-        if ("-" in number and number != "-" + number.replace("-", "")) or " " in number:
+        self.verification_index = 0
+        self.verification_constant = 0
+
+        if ("-" in number and number != "-" + number.replace("-", "")) or (len(self.verification_number) > 2) or " " in number:
             self.verification_errors.append("ERROR! The converted number is not a valid integer")
+
+        for self.numbers in number.replace("-", "").replace(".", "").replace(" ", ""):
+            if self.sys_alphabet.index(self.numbers) > self.verification_index:
+                self.verification_index = self.sys_alphabet.index(self.numbers)
+
+        if (sys_state != 0 and sys_state != 1) and self.verification_index >= (sys_state + self.verification_constant):
+            self.verification_errors.append("ERROR! The converted number has gone beyond the scope of the number system")
 
         if self.verification_errors:
             self.verification_error_state = False
@@ -122,7 +133,15 @@ class SYS_Convertor_Class():
             self.error_handler(number, sys_state)
 
             if self.error_state:
-                return int(number, sys_state)
+                if  "." in number:
+                    self.number_in_sys_1 = ""
+
+                    for self.numbers_1 in number.split("."):
+                        self.number_in_sys_1 += str(int(self.numbers_1, sys_state)) + "."
+
+                    return self.number_in_sys_1[0:-1]
+                else:
+                    return int(number, sys_state)
             else:
                 return self.error_message
 
