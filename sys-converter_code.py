@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -
-# version 1.1.4
+# version 1.1.6
 
 class SYS_Convertor_Class():
     def __init__(self):
@@ -45,9 +45,15 @@ class SYS_Convertor_Class():
         if ("-" in number and number != "-" + number.replace("-", "")) or (len(self.verification_number) > 2) or " " in number:
             self.verification_errors.append("ERROR! The converted number is not a valid integer")
 
-        for self.numbers in number.replace("-", "").replace(".", "").replace(" ", ""):
-            if self.sys_alphabet.index(self.numbers) > self.verification_index:
-                self.verification_index = self.sys_alphabet.index(self.numbers)
+        for self.numbers_1 in number.replace("-", "").replace(".", ""):
+            if not(self.numbers_1 in self.sys_alphabet):
+                self.verification_errors.append("ERROR! The converted number is not a valid integer")
+
+                number = number.replace(self.numbers_1, "")
+
+        for self.numbers_2 in number.replace("-", "").replace(".", "").replace(" ", ""):
+            if self.sys_alphabet.index(self.numbers_2) > self.verification_index:
+                self.verification_index = self.sys_alphabet.index(self.numbers_2)
 
         if (sys_state != 0 and sys_state != 1) and self.verification_index >= (sys_state + self.verification_constant):
             self.verification_errors.append("ERROR! The converted number has gone beyond the scope of the number system")
@@ -84,43 +90,19 @@ class SYS_Convertor_Class():
 
                     return "".join(reversed(self.number_in_sys))
             else:
-                self.number_str = str(number)
-                if '.' in self.number_str:
-                    self.integer_part, self.fractional_part = self.number_str.split('.')
-                    self.integer_part_number = int(self.integer_part)
-                    self.fractional_part_number = float('0.' + self.fractional_part)
-                else:
-                    self.integer_part_number = int(number)
-                    self.fractional_part_number = 0.0
+                self.splitted_number = str(number).split(".")
+                self.result = []
 
-                self.limitation = 10
-                self.count = 0
+                for self.splitted_nums in self.splitted_number:
+                    self.splitted_nums = int(self.splitted_nums)
 
-                self.number_in_sys = []
-                self.result = None
+                    while self.splitted_nums != 0:
+                        self.result.append(self.sys_alphabet[self.splitted_nums % sys_state])
+                        self.splitted_nums //= sys_state
 
-                if self.integer_part_number != 0:
-                    while self.integer_part_number != 0:
-                        self.number_in_sys.append(self.sys_alphabet[self.integer_part_number % sys_state])
-                        self.integer_part_number //= sys_state
-                else:
-                    self.number_in_sys.append("0")
-                self.result = "".join(reversed(self.number_in_sys))
+                    self.result.append(".")
 
-                self.fractional_digits = []
-                self.fractional_temp = self.fractional_part_number
-
-                while self.fractional_temp > 0 and self.count < self.limitation:
-                    self.fractional_temp *= sys_state
-                    self.digit = int(self.fractional_temp)
-                    self.fractional_digits.append(self.sys_alphabet[self.digit])
-                    self.fractional_temp -= self.digit
-                    self.count += 1
-
-                if self.fractional_digits:
-                    self.result += "." + "".join(self.fractional_digits)
-
-                return self.result
+                return "".join(reversed(self.result[0:-1]))
 
         else:
             return self.error_message
