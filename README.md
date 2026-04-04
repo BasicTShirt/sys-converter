@@ -121,6 +121,8 @@ print(result)
 | **1.1.2** | 02.04.2026 | Release: Fixed Critical Bugs                                                                              |
 | **1.1.3** | 03.04.2026 | Release: Fixed Error Handler Bugs                                                                         |
 | **1.1.4** | 03.04.2026 | Release: Added Support Float Numbers For «resys» Function And A New Error Handler                         |
+| **1.1.5** | 04.04.2026 | Release: Redesigned Translation Of Float Numbers By The «sys» Function                                    |
+| **1.1.6** | 04.04.2026 | Release: Fixed Readme And A New Error Handler                                                             |
 
 ---
 ###### **Made by the Hi Team.**
