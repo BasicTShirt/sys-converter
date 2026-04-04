@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -
-# version 1.1.7
+# version 1.1.8
 
 class SYS_Convertor_Class():
     def __init__(self):
@@ -74,7 +74,7 @@ class SYS_Convertor_Class():
         self.type_sys_state = type(sys_state)
 
         if self.mode == "sys":
-            if self.type_number == str:
+            if self.type_number != int or self.type_number != float:
                 self.type_errors.append("ERROR! Type of the converted number is not a integer or float")
             if self.type_sys_state != int:
                 self.type_errors.append("ERROR! Type of the number system is not a integer")
