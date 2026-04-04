@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -
-# version 1.1.6
+# version 1.1.7
 
 class SYS_Convertor_Class():
     def __init__(self):
@@ -64,68 +64,107 @@ class SYS_Convertor_Class():
         else:
             self.verification_error_state = True
 
+    def type_error_handler(self, number, sys_state):
+        self.type_error_state = None
+        self.type_error_message = None
+
+        self.type_errors = []
+
+        self.type_number = type(number)
+        self.type_sys_state = type(sys_state)
+
+        if self.mode == "sys":
+            if self.type_number == str:
+                self.type_errors.append("ERROR! Type of the converted number is not a integer or float")
+            if self.type_sys_state != int:
+                self.type_errors.append("ERROR! Type of the number system is not a integer")
+        if self.mode == "resys":
+            if self.type_number != str:
+                self.type_errors.append("ERROR! Type of the converted number is not a string")
+            if self.type_sys_state != int:
+                self.type_errors.append("ERROR! Type of the number system is not a integer")
+
+        if self.type_errors:
+            self.type_error_state = False
+            self.type_error_message = "\n".join(self.type_errors) + "\n"
+        else:
+            self.type_error_state = True
+
     def sys(self, number, sys_state):
-        self.error_handler(number, sys_state)
+        self.mode = "sys"
+        self.type_error_handler(number, sys_state)
 
-        if self.error_state:
-            if int(number) == number:
-                if number == 0:
-                    return "0"
-                elif number < 0:
-                    self.temp_number = int(str(number)[1:])
-                    self.number_in_sys = []
-
-                    while self.temp_number != 0:
-                        self.number_in_sys.append(self.sys_alphabet[self.temp_number % sys_state])
-                        self.temp_number //= sys_state
-
-                    return "-" + "".join(reversed(self.number_in_sys))
-                else:
-                    self.temp_number = int(number)
-                    self.number_in_sys = []
-
-                    while self.temp_number != 0:
-                        self.number_in_sys.append(self.sys_alphabet[self.temp_number % sys_state])
-                        self.temp_number //= sys_state
-
-                    return "".join(reversed(self.number_in_sys))
-            else:
-                self.splitted_number = str(number).split(".")
-                self.result = []
-
-                for self.splitted_nums in self.splitted_number:
-                    self.splitted_nums = int(self.splitted_nums)
-
-                    while self.splitted_nums != 0:
-                        self.result.append(self.sys_alphabet[self.splitted_nums % sys_state])
-                        self.splitted_nums //= sys_state
-
-                    self.result.append(".")
-
-                return "".join(reversed(self.result[0:-1]))
-
-        else:
-            return self.error_message
-    def resys(self, number, sys_state):
-        self.verification_error_handler(number, sys_state)
-
-        if not(self.verification_error_state):
-            return self.verification_error_message
-        else:
+        if self.type_error_state:
             self.error_handler(number, sys_state)
 
             if self.error_state:
-                if  "." in number:
-                    self.number_in_sys_1 = ""
+                if int(number) == number:
+                    if number == 0:
+                        return "0"
+                    elif number < 0:
+                        self.temp_number = int(str(number)[1:])
+                        self.number_in_sys = []
 
-                    for self.numbers_1 in number.split("."):
-                        self.number_in_sys_1 += str(int(self.numbers_1, sys_state)) + "."
+                        while self.temp_number != 0:
+                            self.number_in_sys.append(self.sys_alphabet[self.temp_number % sys_state])
+                            self.temp_number //= sys_state
 
-                    return self.number_in_sys_1[0:-1]
+                        return "-" + "".join(reversed(self.number_in_sys))
+                    else:
+                        self.temp_number = int(number)
+                        self.number_in_sys = []
+
+                        while self.temp_number != 0:
+                            self.number_in_sys.append(self.sys_alphabet[self.temp_number % sys_state])
+                            self.temp_number //= sys_state
+
+                        return "".join(reversed(self.number_in_sys))
                 else:
-                    return int(number, sys_state)
+                    self.splitted_number = str(number).split(".")
+                    self.result = []
+
+                    for self.splitted_nums in self.splitted_number:
+                        self.splitted_nums = int(self.splitted_nums)
+
+                        while self.splitted_nums != 0:
+                            self.result.append(self.sys_alphabet[self.splitted_nums % sys_state])
+                            self.splitted_nums //= sys_state
+
+                        self.result.append(".")
+
+                    return "".join(reversed(self.result[0:-1]))
+
             else:
                 return self.error_message
+        else:
+            return self.type_error_message
+    def resys(self, number, sys_state):
+        self.mode = "resys"
+
+        self.type_error_handler(number, sys_state)
+
+        if self.type_error_state:
+            self.verification_error_handler(number, sys_state)
+
+            if not(self.verification_error_state):
+                return self.verification_error_message
+            else:
+                self.error_handler(number, sys_state)
+
+                if self.error_state:
+                    if  "." in number:
+                        self.number_in_sys_1 = ""
+
+                        for self.numbers_1 in number.split("."):
+                            self.number_in_sys_1 += str(int(self.numbers_1, sys_state)) + "."
+
+                        return self.number_in_sys_1[0:-1]
+                    else:
+                        return int(number, sys_state)
+                else:
+                    return self.error_message
+        else:
+            return self.type_error_message
 
 M = SYS_Convertor_Class()
 
