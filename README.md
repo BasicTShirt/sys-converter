@@ -125,4 +125,5 @@ print(result)
 | **1.1.6** | 04.04.2026 | Release: Fixed Readme And A New Error Handler                                                             |
 | **1.1.7** | 04.04.2026 | Release: A New Type Error Handler                                                                         |
 | **1.1.8** | 04.04.2026 | Release: Fixed Type Error Handler Bug                                                                     |
+| **1.1.9** | 09.04.2026 | Release: Fixed Type Error Handler Bug                                                                     |
 ###### **Made by the Hi Team.**
