@@ -108,22 +108,23 @@ print(result)
 
 ## Changelog
 
-| Version   | Date       | Commit                                                                                                    |
-|-----------|------------|-----------------------------------------------------------------------------------------------------------|
-| **0.1.0** | 10.03.2026 | Beta: First Beta Version On PyPI                                                                          |
-| **0.1.1** | 10.03.2026 | Beta: Fixed Critical Bugs                                                                                 |
-| **0.1.2** | 10.03.2026 | Beta: Fixed Critical Bugs And New Error Handling                                                          |
-| **1.0.0** | 31.03.2026 | Release: New Readme                                                                                       |
-| **1.0.1** | 31.03.2026 | Release: New Readme                                                                                       |
-| **1.0.2** | 31.03.2026 | Release: Without Changes                                                                                  |
-| **1.1.0** | 02.04.2026 | Release: Added Support For Negative Numbers, A New «resys» Function, A New Error Handler And A New Readme |
-| **1.1.1** | 02.04.2026 | Release: Fixed Critical Bugs                                                                              |
-| **1.1.2** | 02.04.2026 | Release: Fixed Critical Bugs                                                                              |
-| **1.1.3** | 03.04.2026 | Release: Fixed Error Handler Bugs                                                                         |
-| **1.1.4** | 03.04.2026 | Release: Added Support Float Numbers For «resys» Function And A New Error Handler                         |
-| **1.1.5** | 04.04.2026 | Release: Redesigned Translation Of Float Numbers By The «sys» Function                                    |
-| **1.1.6** | 04.04.2026 | Release: Fixed Readme And A New Error Handler                                                             |
-| **1.1.7** | 04.04.2026 | Release: A New Type Error Handler                                                                         |
-| **1.1.8** | 04.04.2026 | Release: Fixed Type Error Handler Bug                                                                     |
-| **1.1.9** | 09.04.2026 | Release: Fixed Type Error Handler Bug                                                                     |
+| Version    | Date       | Commit                                                                                                    |
+|------------|------------|-----------------------------------------------------------------------------------------------------------|
+| **0.1.0**  | 10.03.2026 | Beta: First Beta Version On PyPI                                                                          |
+| **0.1.1**  | 10.03.2026 | Beta: Fixed Critical Bugs                                                                                 |
+| **0.1.2**  | 10.03.2026 | Beta: Fixed Critical Bugs And New Error Handling                                                          |
+| **1.0.0**  | 31.03.2026 | Release: New Readme                                                                                       |
+| **1.0.1**  | 31.03.2026 | Release: New Readme                                                                                       |
+| **1.0.2**  | 31.03.2026 | Release: Without Changes                                                                                  |
+| **1.1.0**  | 02.04.2026 | Release: Added Support For Negative Numbers, A New «resys» Function, A New Error Handler And A New Readme |
+| **1.1.1**  | 02.04.2026 | Release: Fixed Critical Bugs                                                                              |
+| **1.1.2**  | 02.04.2026 | Release: Fixed Critical Bugs                                                                              |
+| **1.1.3**  | 03.04.2026 | Release: Fixed Error Handler Bugs                                                                         |
+| **1.1.4**  | 03.04.2026 | Release: Added Support Float Numbers For «resys» Function And A New Error Handler                         |
+| **1.1.5**  | 04.04.2026 | Release: Redesigned Translation Of Float Numbers By The «sys» Function                                    |
+| **1.1.6**  | 04.04.2026 | Release: Fixed Readme And A New Error Handler                                                             |
+| **1.1.7**  | 04.04.2026 | Release: A New Type Error Handler                                                                         |
+| **1.1.8**  | 04.04.2026 | Release: Fixed Type Error Handler Bug                                                                     |
+| **1.1.9**  | 09.04.2026 | Release: Fixed Type Error Handler Bug                                                                     |
+| **1.1.10** | 13.08.2026 | Release: New Contact Details                                                                              |
 ###### **Made by the Hi Team.**
