@@ -127,4 +127,5 @@ print(result)
 | **1.1.8**  | 04.04.2026 | Release: Fixed Type Error Handler Bug                                                                     |
 | **1.1.9**  | 09.04.2026 | Release: Fixed Type Error Handler Bug                                                                     |
 | **1.1.10** | 13.08.2026 | Release: New Contact Details                                                                              |
+| **2.0.0**  | 15.08.2026 | Release: New Clean Code                                                                                   |
 ###### **Made by the Hi Team.**
