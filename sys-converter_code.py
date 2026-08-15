@@ -1,178 +1,177 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -
-# version 1.1.10
+# -*- coding: utf-8 -*-
+# version 2.0.0
 
-class SYS_Convertor_Class():
+class SYSConvertor():
     def __init__(self):
-        super().__init__()
-
         self.sys_alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                              'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
                              'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
                              'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-    def error_handler(self, number, sys_state):
-        self.error_state = None
-        self.error_message = None
-
-        self.errors = []
+    def error_handler(
+            self,
+            number: str | int,
+            sys_state: int
+    ) -> None:
+        errors = []
 
         if sys_state is None:
-            self.errors.append("ERROR! You have not entered the base of the number system")
+            errors.append("ERROR! You have not entered the base of the number system")
         else:
             if sys_state > 36:
-                self.errors.append("ERROR! The base of the number system cannot be greater than 36")
+                errors.append("ERROR! The base of the number system cannot be greater than 36")
             if sys_state < 2:
-                self.errors.append("ERROR! The base of the number system cannot be less than 2")
-            if int(sys_state) != sys_state:
-                self.errors.append("ERROR! The base of the number system cannot be float number")
+                errors.append("ERROR! The base of the number system cannot be less than 2")
 
-        if self.errors:
-            self.error_state = False
-            self.error_message = "\n".join(self.errors) + "\n"
-        else:
-            self.error_state = True
+        if errors:
+            raise ValueError("\n".join(errors))
 
-    def verification_error_handler(self, number, sys_state):
-        self.verification_error_state = None
-        self.verification_error_message = None
-        self.verification_number = number.split(".")
-        self.verification_errors = []
+    def verification_error_handler(
+            self,
+            number: str,
+            sys_state: int
+    ) -> None:
+        verification_number = number.split(".")
+        verification_errors = []
 
-        self.verification_index = 0
-        self.verification_constant = 0
+        verification_index = 0
 
-        if ("-" in number and number != "-" + number.replace("-", "")) or (len(self.verification_number) > 2) or " " in number:
-            self.verification_errors.append("ERROR! The converted number is not a valid integer")
+        if (
+                ("-" in number and number != "-" + number.replace("-", ""))
+                or (len(verification_number) > 2)
+                or " " in number
+        ):
+            verification_errors.append("ERROR! The converted number is not a valid integer")
 
-        for self.numbers_1 in number.replace("-", "").replace(".", ""):
-            if not(self.numbers_1 in self.sys_alphabet):
-                self.verification_errors.append("ERROR! The converted number is not a valid integer")
+        for numbers_1 in number.replace("-", "").replace(".", ""):
+            if not (numbers_1 in self.sys_alphabet):
+                verification_errors.append("ERROR! The converted number is not a valid integer")
+                number = number.replace(numbers_1, "")
 
-                number = number.replace(self.numbers_1, "")
+        for numbers_2 in number.replace("-", "").replace(".", "").replace(" ", ""):
+            if self.sys_alphabet.index(numbers_2) > verification_index:
+                verification_index = self.sys_alphabet.index(numbers_2)
 
-        for self.numbers_2 in number.replace("-", "").replace(".", "").replace(" ", ""):
-            if self.sys_alphabet.index(self.numbers_2) > self.verification_index:
-                self.verification_index = self.sys_alphabet.index(self.numbers_2)
+        if (
+                (sys_state != 0 and sys_state != 1)
+                and verification_index >= (sys_state)
+        ):
+            verification_errors.append("ERROR! The converted number has gone beyond the scope of the number system")
 
-        if (sys_state != 0 and sys_state != 1) and self.verification_index >= (sys_state + self.verification_constant):
-            self.verification_errors.append("ERROR! The converted number has gone beyond the scope of the number system")
+        if verification_errors:
+            raise ValueError("\n".join(verification_errors))
 
-        if self.verification_errors:
-            self.verification_error_state = False
-            self.verification_error_message = "\n".join(self.verification_errors) + "\n"
-        else:
-            self.verification_error_state = True
+    def type_error_handler(
+            self,
+            number: str | int,
+            sys_state: int,
+            mode: str
+    ) -> None:
+        type_errors = []
 
-    def type_error_handler(self, number, sys_state):
-        self.type_error_state = None
-        self.type_error_message = None
+        if mode == "sys":
+            if (
+                    not isinstance(number, int)
+                    and not isinstance(number, float)
+            ):
+                type_errors.append("ERROR! Type of the converted number is not a integer or float")
+            if not isinstance(sys_state, int):
+                type_errors.append("ERROR! Type of the number system is not a integer")
+        if mode == "resys":
+            if not isinstance(number, str):
+                type_errors.append("ERROR! Type of the converted number is not a string")
+            if not isinstance(sys_state, int):
+                type_errors.append("ERROR! Type of the number system is not a integer")
 
-        self.type_errors = []
+        if type_errors:
+            raise ValueError("\n".join(type_errors))
 
-        self.type_number = type(number)
-        self.type_sys_state = type(sys_state)
+    def sys(
+            self,
+            number: int | float,
+            sys_state: int
+    ) -> str:
+        self.type_error_handler(number, sys_state, "sys")
+        self.error_handler(number, sys_state)
 
-        if self.mode == "sys":
-            if self.type_number != int and self.type_number != float:
-                self.type_errors.append("ERROR! Type of the converted number is not a integer or float")
-            if self.type_sys_state != int:
-                self.type_errors.append("ERROR! Type of the number system is not a integer")
-        if self.mode == "resys":
-            if self.type_number != str:
-                self.type_errors.append("ERROR! Type of the converted number is not a string")
-            if self.type_sys_state != int:
-                self.type_errors.append("ERROR! Type of the number system is not a integer")
+        if isinstance(number, int):
+            if number == 0:
+                return "0"
+            elif number < 0:
+                temp_number = int(str(number)[1:])
+                number_in_sys = []
 
-        if self.type_errors:
-            self.type_error_state = False
-            self.type_error_message = "\n".join(self.type_errors) + "\n"
-        else:
-            self.type_error_state = True
+                while temp_number != 0:
+                    number_in_sys.append(self.sys_alphabet[temp_number % sys_state])
+                    temp_number //= sys_state
 
-    def sys(self, number, sys_state):
-        self.mode = "sys"
-        self.type_error_handler(number, sys_state)
-
-        if self.type_error_state:
-            self.error_handler(number, sys_state)
-
-            if self.error_state:
-                if int(number) == number:
-                    if number == 0:
-                        return "0"
-                    elif number < 0:
-                        self.temp_number = int(str(number)[1:])
-                        self.number_in_sys = []
-
-                        while self.temp_number != 0:
-                            self.number_in_sys.append(self.sys_alphabet[self.temp_number % sys_state])
-                            self.temp_number //= sys_state
-
-                        return "-" + "".join(reversed(self.number_in_sys))
-                    else:
-                        self.temp_number = int(number)
-                        self.number_in_sys = []
-
-                        while self.temp_number != 0:
-                            self.number_in_sys.append(self.sys_alphabet[self.temp_number % sys_state])
-                            self.temp_number //= sys_state
-
-                        return "".join(reversed(self.number_in_sys))
-                else:
-                    self.splitted_number = str(number).split(".")
-                    self.result = []
-
-                    for self.splitted_nums in self.splitted_number:
-                        self.splitted_nums = int(self.splitted_nums)
-
-                        while self.splitted_nums != 0:
-                            self.result.append(self.sys_alphabet[self.splitted_nums % sys_state])
-                            self.splitted_nums //= sys_state
-
-                        self.result.append(".")
-
-                    return "".join(reversed(self.result[0:-1]))
-
+                return "-" + "".join(reversed(number_in_sys))
             else:
-                return self.error_message
+                temp_number = int(number)
+                number_in_sys = []
+
+                while temp_number != 0:
+                    number_in_sys.append(self.sys_alphabet[temp_number % sys_state])
+                    temp_number //= sys_state
+
+                return "".join(reversed(number_in_sys))
         else:
-            return self.type_error_message
-    def resys(self, number, sys_state):
-        self.mode = "resys"
+            splitted_number = str(number).replace("-", "").split(".")
+            result = []
 
-        self.type_error_handler(number, sys_state)
+            integer_part = int(splitted_number[0])
+            if integer_part == 0:
+                result.append("0")
+            while integer_part != 0:
+                result.append(self.sys_alphabet[integer_part % sys_state])
+                integer_part //= sys_state
+            result = ["".join(reversed(result))]
 
-        if self.type_error_state:
-            self.verification_error_handler(number, sys_state)
+            if len(splitted_number) == 2:
+                fractional = float("0." + splitted_number[1])
+                result.append(".")
+                precision = 0
+                while fractional > 1e-10 and precision < 12:
+                    fractional *= sys_state
+                    digit = int(fractional)
+                    result.append(self.sys_alphabet[digit])
+                    fractional -= digit
+                    fractional = round(fractional, 10)
+                    precision += 1
 
-            if not(self.verification_error_state):
-                return self.verification_error_message
-            else:
-                self.error_handler(number, sys_state)
+            if number < 0:
+                return "-" + "".join(result)
+            return "".join(result)
 
-                if self.error_state:
-                    if  "." in number:
-                        self.number_in_sys_1 = ""
+    def resys(
+            self,
+            number: str,
+            sys_state: int
+    ) -> int | float:
+        self.type_error_handler(number, sys_state, "resys")
+        self.verification_error_handler(number, sys_state)
+        self.error_handler(number, sys_state)
 
-                        for self.numbers_1 in number.split("."):
-                            self.number_in_sys_1 += str(int(self.numbers_1, sys_state)) + "."
-
-                        return self.number_in_sys_1[0:-1]
-                    else:
-                        return int(number, sys_state)
-                else:
-                    return self.error_message
+        if "." in number:
+            parts = number.split(".")
+            integer_part = int(parts[0], sys_state)
+            fractional = 0.0
+            divisor = sys_state
+            for digit in parts[1]:
+                fractional += int(digit, sys_state) / divisor
+                divisor *= sys_state
+            return integer_part + fractional
         else:
-            return self.type_error_message
-
-M = SYS_Convertor_Class()
+            return int(number, sys_state)
 
 def sys(n, s):
-    return M.sys(n, s)
+    converter = SYSConvertor()
+    return converter.sys(n, s)
+
 def resys(n, s):
-    return M.resys(n, s)
+    converter = SYSConvertor()
+    return converter.resys(n, s)
 
 if __name__ == '__main__':
-    sys(n, s)
-    resys(n, s)
+    pass
